@@ -1,0 +1,21 @@
+﻿@model GuestBookSystem.Models.Guestbook
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "Delete";
+}
+<ul class="nav nav-tabs">
+    <li role="presentation">@Html.ActionLink("返回主页", "Index")</li>
+    <li role="presentation">@Html.ActionLink("注销登录","Logout")</li>
+</ul>
+<div class="Nav">
+    <h2 style="text-align:center"><span class="label label-danger">确认删除吗？</span></h2>
+    <div class="jumbotron text-center">
+    <p>留言人邮箱：@Model.User.Email</p>
+    <p>内容：@Model.Content</p>
+    <p>时间：@Model.CreatedOn</p>
+    @using (Html.BeginForm())
+    {
+        <input class="btn btn-danger" type="submit" value="确认删除" />
+    }
+    </div>
+</div>

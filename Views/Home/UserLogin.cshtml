@@ -1,0 +1,20 @@
+﻿@model GuestBookSystem.Models.User
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "UserLogin";
+}
+<div class="jumbotron text-center">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>
+            <span class="topic">用户名:</span>@Html.EditorFor(a => a.Name)
+            @Html.ValidationMessageFor(a => a.Name)
+        </p>
+        <p>
+            <span class="topic">密码:</span>@Html.EditorFor(a => a.Password)
+            @Html.ValidationMessageFor(a => a.Password)
+        </p>
+        <input type="submit" class="btn btn-success" style="margin-left:0px" value="登录" />
+    }
+</div>

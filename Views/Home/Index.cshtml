@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="page-header">
+    <h1>欢迎使用留言本系统 <small>你终于来啦！</small></h1>
+</div>
+<section>
+    <div class="main" style="background-image:url(~/Content/simple.png)">
+        
+        <ul class="lead">
+            使用说明
+            <li>
+                游客须知：
+                <ul>
+                    <li>
+                        由于您未注册，仅能使用<strong>@Html.ActionLink("留言板", "About")</strong>功能，如有需要请联系
+                        594592214@qq.com &reg;
+                    </li>
+                </ul>
+            </li>
+            <li>
+                普通用户须知：
+
+                <ul>
+                    <li>
+                        如果您持有本系统账号，可以通过登录使用其他功能
+                    </li>
+                    <li>
+                        如需添加新留言请先登录
+                    </li>
+
+                </ul>
+
+            </li>
+            <li>
+                管理员须知
+                <ul>
+                    <li>
+                        如果您被设定为本系统管理员，您可以通过登录对该系统进行管理
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</section>

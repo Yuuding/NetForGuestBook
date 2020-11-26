@@ -1,0 +1,35 @@
+﻿@model List<GuestBookSystem.Models.Guestbook>
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "全部留言";
+}
+<h2 style="text-align:center"><span class="label label-primary">留言本</span></h2>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active">@Html.ActionLink("全局留言", "Index")</li>
+    <li role="presentation">@Html.ActionLink("我的留言", "Mywords", new { id = 1 })</li>
+    <li role="presentation">@Html.ActionLink("添加留言", "CreatMessage", new { email = Session["AuthorEmail"] })</li>
+    <li role="presentation">@Html.ActionLink("注销登录", "Logout")</li>
+</ul>
+
+
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>温馨提示：</strong> 本页只显示已审核留言.
+</div>
+
+<div class="Nav">
+    @foreach (var gb in Model)
+    {
+        
+        if (gb.isPass == true)
+        {   <div class="jumbotron">
+    <p>留言人：@gb.User.Email ，时间：@gb.CreatedOn</p>
+    <p>标题：@gb.Title</p>
+    <p>内容：@gb.Content</p>
+
+    <hr />
+</div>
+    }
+
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model GuestBookSystem.Models.Guestbook
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "CreatMessage";
+}
+
+<h2 style="text-align:center"><span class="label label-primary">留下你想说的话</span></h2>
+<ul class="nav nav-tabs">
+    <li role="presentation">@Html.ActionLink("全局留言", "Index")</li>
+    <li role="presentation">@Html.ActionLink("我的留言", "Mywords", new { id = 1 })</li>
+    <li role="presentation" class="active">@Html.ActionLink("添加留言", "CreatMessage", new { email = Session["AuthorEmail"] })</li>
+    <li role="presentation">@Html.ActionLink("注销登录", "Logout")</li>
+</ul>
+<div class="jumbotron">
+    <form action="/User/CreatMessage" method="post" class="text-center">
+
+        <p>
+            <span class="topic">标题：</span>
+            @Html.TextBoxFor(g => g.Title)
+            @Html.ValidationMessageFor(g => g.Title)
+        </p>
+        <p>
+            <span class="topic">
+                内容：
+            </span>
+            @Html.TextAreaFor(g => g.Content, new { cols = 23, rows = 5 })
+            @Html.ValidationMessageFor(g => g.Content)
+        </p>
+        
+        <input type="submit" class="btn btn-success" value="发布" />
+    </form>
+    </div>
+@section scripts{
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>
+        window.onload = function () { document.getElementById("Content").innerHTML = "留言内容"; }
+    </script>
+}

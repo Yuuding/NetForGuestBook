@@ -1,0 +1,40 @@
+﻿@model List<GuestBookSystem.Models.Guestbook>
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "About";
+
+}
+
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active">@Html.ActionLink("返回主页", "Index")</li>
+</ul>
+
+
+<div class="Nav">
+
+    @foreach (var gb in Model)
+    {
+
+        <div class="jumbotron">
+            
+
+            <div class="content" id="content" onclick="showMenu(this)">
+
+                <p>留言人：@gb.User.Email ，时间：@gb.CreatedOn</p>
+                <p>标题：@gb.Title</p>
+                <p>内容：@gb.Content</p>
+
+            </div>
+
+
+
+
+           
+        </div>
+        <hr />
+
+
+
+
+    }
+</div>

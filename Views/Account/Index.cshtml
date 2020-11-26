@@ -1,0 +1,115 @@
+﻿@model List<GuestBookSystem.Models.Guestbook>
+@Styles.Render("~/Content/StyleSheet1.css")
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2 style="text-align:center"><span class="label label-primary">WelCome！</span></h2>
+<ul class="nav nav-tabs">
+<li role="presentation" class="active">@Html.ActionLink("返回主页", "Index")</li>
+<li role="presentation">@Html.ActionLink("注销登录", "Logout")</li>
+
+</ul>
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    通过点击留言内容可以选择执行<strong>删除</strong>和<strong>审核</strong>操作噢
+</div>
+<div class="Nav">
+
+    @foreach (var gb in Model)
+    {
+
+        <div class="jumbotron">
+            @if (gb.isPass == true)
+            {
+                <span class="bg-success"><img src="~/Content/成功.png">此条留言已通过审核</span>
+            }
+            else
+            {
+                <span class="bg-warning"><img src="~/Content/失败.png">待审核......</span>
+            }
+
+            <div class="content" id="content" onclick="showMenu(this)">
+
+                <p>留言人：@gb.User.Email ，时间：@gb.CreatedOn</p>
+                <p>标题：@gb.Title</p>
+                <p>内容：@gb.Content</p>
+
+                <script>
+                    var clickNum = 0;
+
+                    // console.log(div_ls)
+
+                    window.onload = function () {
+                        var div_ls = document.getElementsByTagName('div');
+
+                        for (var i = 0; i < div_ls.length - 1; i++) {
+                            // 遍历所有的div并根据id做判断
+                            if (div_ls[i].getAttribute('id') == 'content') {
+                                // 对满足条件的标签设置属性即可
+                                div_ls[i].onmouseover = function () {
+                                    this.className = "alt"
+                                    this.style.cursor = "pointer";
+
+                                }
+                                div_ls[i].onmouseout = function () {
+                                    this.className = "content";
+                                }
+
+                            }
+                        }
+
+
+                    }
+                    function showMenu(obj) {
+                        clickNum++;
+
+
+                        var div_op = document.getElementsByTagName('div');
+
+                        for (var i = 0; i < div_op.length; i++) {
+                            // 遍历所有的div并根据id做判断
+                            if (div_op[i].getAttribute('id') == 'content') {
+
+                                // 对满足条件的标签设置属性即可
+
+                                if (clickNum % 2 == 1)
+                                    obj.nextElementSibling.style.height = "35px";
+                                else
+                                    obj.nextElementSibling.style.height = "0px";
+
+
+                            }
+
+
+                        }
+
+                    }
+                </script>
+
+            </div>
+
+
+
+
+            @if (gb.isPass == true)
+            {<div class="op-nav" id="opNav">
+                    <p><img src="~/Content/删除.png">@Html.ActionLink("删除留言", "Delete", new { id = gb.GuestbookId }, new { @class = "btn btn-info" })</p>
+                </div>
+            }
+            else
+            {<div class="op-nav" id="opNav">
+                    <p><img src="~/Content/删除.png">@Html.ActionLink("删除留言", "Delete", new { id = gb.GuestbookId }, new { @class = "btn btn-info" }) <img src="~/Content/管理.png" style="margin-left:30px">@Html.ActionLink("审核留言", "CheckMessage", new { id = gb.GuestbookId }, new { @class = "btn btn-success" })</p>
+                </div>
+            }
+            <div class="pass">
+            </div>
+        </div>
+        <hr />
+
+
+
+
+    }
+</div>
